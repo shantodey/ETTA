@@ -2,6 +2,8 @@
 
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
+import BookingHeroSection from './components/BookingHeroSection'
+import ServicesSection from './components/ServicesSection'
 
 function App() {
   return (
@@ -9,6 +11,8 @@ function App() {
       <Navbar />
       <main>
         <HeroSection />
+        <BookingHeroSection />
+        <ServicesSection />
       </main>
     </div>
   )

@@ -128,3 +128,18 @@
     @apply font-sans;
     }
 }
+
+@keyframes buildingLoop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-building-loop {
+  display: flex;
+  width: max-content;
+  animation: buildingLoop 25s linear infinite;
+}
