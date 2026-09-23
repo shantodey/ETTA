@@ -81,16 +81,12 @@ export default function PassengersSpeakSection() {
           </div>
         </div>
 
-        {/* Scrollable Cards Row */}
-        <div
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
-          style={{ scrollbarWidth: 'none' }}
-        >
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="snap-start flex-shrink-0 w-[300px] sm:w-[340px]"
+              className="w-full"
             >
               <Card className="border-0 shadow-none bg-transparent p-0 rounded-none">
                 {/* Video Thumbnail with Play button */}

@@ -14,17 +14,14 @@ export default function AppShowcaseSection() {
           </h2>
 
           <div>
-            <button
-              type="button"
-              className="inline-flex items-center gap-2.5 bg-[#0052fe] hover:bg-blue-600 text-white font-semibold px-7 py-3.5 rounded-2xl shadow-lg transition-all active:scale-[0.98] cursor-pointer"
-            >
+            <button type="button"  className="inline-flex items-center gap-2.5 bg-[#0052fe] hover:bg-blue-600 text-white font-semibold px-7 py-3.5 rounded-2xl shadow-lg transition-all active:scale-[0.98] cursor-pointer">
               <span>Download App</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* 2 Grid Columns */}
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           <Card className="lg:col-span-7 bg-[#1c4fd8] border-0 rounded-3xl overflow-hidden p-0 relative flex items-center justify-center min-h-[380px] sm:min-h-[440px] shadow-xl">
@@ -33,11 +30,7 @@ export default function AppShowcaseSection() {
 
           {/* Right Card: Freedom (span 5 or 4) */}
           <Card className="lg:col-span-5 bg-white text-neutral-900 border-0 rounded-3xl overflow-hidden p-0 relative flex items-center justify-center min-h-[380px] sm:min-h-[440px] shadow-xl">
-            <img
-              src={freedomImg}
-              alt="Freedom"
-              className="w-full h-full object-cover object-center"
-            />
+            <img  src={freedomImg}  alt="Freedom"  className="w-full h-full object-cover object-center"/>
           </Card>
         </div>
       </div>

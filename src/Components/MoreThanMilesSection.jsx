@@ -21,7 +21,7 @@ export default function MoreThanMilesSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         {cards.map((item) => (
-          <Card key={item.id} className="group relative overflow-hidden rounded-3xl border-0 p-0 shadow-sm transition-all duration-300 hover:shadow-xl cursor-pointer ring-0 aspect-4/3 sm:aspect-square">
+          <Card key={item.id} className="group relative overflow-hidden rounded-3xl border-0 p-0 shadow-sm transition-all duration-300 hover:shadow-xl cursor-pointer ring-0 aspect-[4/5]">
             <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" />
 
             <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/10 to-transparent pointer-events-none" />

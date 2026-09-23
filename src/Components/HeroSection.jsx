@@ -12,7 +12,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-28 sm:pb-36">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
         <div className="max-w-xl">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 leading-[1.15]">

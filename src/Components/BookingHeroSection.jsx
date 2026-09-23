@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Car, MapPin, Calendar, ArrowRight, ChevronDown } from 'lucide-react'
 import movingCarGif from '../assets/Moving car.gif'
 import buildingImg from '../assets/Building.png'
@@ -12,30 +12,39 @@ export default function BookingHeroSection() {
   const [dateTime, setDateTime] = useState('')
 
   return (
-    <div className="w-full relative overflow-hidden bg-[#0052fe] text-white pt-10 pb-0">
+    <div className="w-full relative overflow-hidden bg-[#0052fe] text-white pt-0 pb-0">
       {/* Container */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Floating Card */}
-        <div className="relative mb-16 sm:mb-20">
+        {/* Floating Card overlapping the white and blue boundary */}
+        <div className="relative -mt-24 sm:-mt-28 mb-16 sm:mb-20">
           {/* Top Tabs */}
-          <div className="inline-flex rounded-t-2xl overflow-hidden shadow-sm">
+          <div className="inline-flex rounded-t-xl overflow-hidden shadow-sm">
             <button
               type="button"
               onClick={() => setActiveTab('car')}
-              className={`px-7 py-3 text-sm font-semibold transition-colors ${activeTab === 'car'
-                  ? 'bg-[#11161d] text-white'
-                  : 'bg-white text-neutral-800 hover:bg-neutral-50'
-                }`}
+              className={`px-7 py-3 text-sm font-bold transition-colors cursor-pointer ${
+                activeTab === 'car'
+                  ? 'bg-[#12161f] text-white'
+                  : 'bg-[#f4f5f7] text-neutral-700 hover:bg-neutral-200'
+              }`}
             >
               Car Rental
             </button>
-            <button type="button" onClick={() => setActiveTab('airport')}
-              className={`px-7 py-3 text-sm font-semibold transition-colors ${activeTab === 'airport' ? 'bg-[#11161d] text-white' : 'bg-white text-neutral-800 hover:bg-neutral-50'}`}> Airport Rental
+            <button
+              type="button"
+              onClick={() => setActiveTab('airport')}
+              className={`px-7 py-3 text-sm font-bold transition-colors cursor-pointer ${
+                activeTab === 'airport'
+                  ? 'bg-[#12161f] text-white'
+                  : 'bg-[#f4f5f7] text-neutral-700 hover:bg-neutral-200'
+              }`}
+            >
+              Airport Rental
             </button>
           </div>
 
           {/* White Card Container */}
-          <div className="bg-white rounded-b-2xl rounded-tr-2xl shadow-xl p-6 sm:p-8 text-neutral-900">
+          <div className="bg-white rounded-b-2xl rounded-tr-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.18)] p-6 sm:p-8 text-neutral-900">
             {/* Input Grid */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-6 border-b border-neutral-100">
               {/* Choose a Car */}
@@ -48,7 +57,7 @@ export default function BookingHeroSection() {
                   <select
                     value={carType}
                     onChange={(e) => setCarType(e.target.value)}
-                    className="w-full bg-transparent text-sm text-neutral-700 py-1.5 pr-8 focus:outline-none appearance-none cursor-pointer placeholder:text-neutral-400"
+                    className="w-full bg-transparent text-sm text-neutral-700 py-1.5 pr-8 focus:outline-none appearance-none cursor-pointer placeholder:text-neutral-400 font-medium"
                   >
                     <option value="" disabled>Select Car Type</option>
                     <option value="sedan">Sedan (4 Seater)</option>
@@ -63,7 +72,7 @@ export default function BookingHeroSection() {
               {/* Pickup Location */}
               <div className="flex flex-col gap-1.5 md:border-r md:border-neutral-200 md:pr-4">
                 <label className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block ring-2 ring-amber-200" />
                   <span>Pickup Location <span className="text-red-500">*</span></span>
                 </label>
                 <input
@@ -71,7 +80,7 @@ export default function BookingHeroSection() {
                   placeholder="Enter Pickup Location"
                   value={pickup}
                   onChange={(e) => setPickup(e.target.value)}
-                  className="w-full bg-transparent text-sm text-neutral-700 py-1.5 focus:outline-none placeholder:text-neutral-400"
+                  className="w-full bg-transparent text-sm text-neutral-700 py-1.5 focus:outline-none placeholder:text-neutral-400 font-medium"
                 />
               </div>
 
@@ -86,7 +95,7 @@ export default function BookingHeroSection() {
                   placeholder="Enter Drop-off Location"
                   value={dropoff}
                   onChange={(e) => setDropoff(e.target.value)}
-                  className="w-full bg-transparent text-sm text-neutral-700 py-1.5 focus:outline-none placeholder:text-neutral-400"
+                  className="w-full bg-transparent text-sm text-neutral-700 py-1.5 focus:outline-none placeholder:text-neutral-400 font-medium"
                 />
               </div>
 
@@ -97,68 +106,82 @@ export default function BookingHeroSection() {
                   <span>Pickup Date & Time <span className="text-red-500">*</span></span>
                 </label>
                 <input
-                  type="datetime-local"
+                  type="text"
+                  placeholder="MM/DD/YYYY 00:00 PM"
                   value={dateTime}
                   onChange={(e) => setDateTime(e.target.value)}
-                  className="w-full bg-transparent text-sm text-neutral-700 py-1.5 focus:outline-none placeholder:text-neutral-400"
+                  onFocus={(e) => (e.target.type = 'datetime-local')}
+                  onBlur={(e) => {
+                    if (!e.target.value) e.target.type = 'text'
+                  }}
+                  className="w-full bg-transparent text-sm text-neutral-700 py-1.5 focus:outline-none placeholder:text-neutral-400 font-medium"
                 />
               </div>
             </div>
 
             {/* Bottom Row: Radio Options & Continue Button */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-5">
-              {/* Radio Group */}
-              <div className="flex items-center gap-6 text-sm font-semibold">
-                <label className="flex items-center gap-2 cursor-pointer select-none">
-                  <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${tripType === 'oneway' ? 'border-[#0052fe]' : 'border-neutral-300'
-                    }`}>
+              {/* Radio Group with Active Pill Highlight */}
+              <div className="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
+                <label
+                  onClick={() => setTripType('oneway')}
+                  className={`flex items-center gap-2 cursor-pointer select-none px-3.5 py-1.5 rounded-full transition-colors ${
+                    tripType === 'oneway'
+                      ? 'bg-blue-50 text-[#0052fe]'
+                      : 'text-neutral-700 hover:text-neutral-900'
+                  }`}
+                >
+                  <span
+                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
+                      tripType === 'oneway' ? 'border-[#0052fe]' : 'border-neutral-300'
+                    }`}
+                  >
                     {tripType === 'oneway' && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
                   </span>
-                  <input
-                    type="radio"
-                    name="tripType"
-                    checked={tripType === 'oneway'}
-                    onChange={() => setTripType('oneway')}
-                    className="sr-only"
-                  />
-                  <span className={tripType === 'oneway' ? 'text-neutral-900' : 'text-neutral-700'}>One Way</span>
+                  <span>One Way</span>
                 </label>
 
-                <label className="flex items-center gap-2 cursor-pointer select-none">
-                  <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${tripType === 'roundway' ? 'border-[#0052fe]' : 'border-neutral-300'
-                    }`}>
+                <label
+                  onClick={() => setTripType('roundway')}
+                  className={`flex items-center gap-2 cursor-pointer select-none px-3.5 py-1.5 rounded-full transition-colors ${
+                    tripType === 'roundway'
+                      ? 'bg-blue-50 text-[#0052fe]'
+                      : 'text-neutral-700 hover:text-neutral-900'
+                  }`}
+                >
+                  <span
+                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
+                      tripType === 'roundway' ? 'border-[#0052fe]' : 'border-neutral-300'
+                    }`}
+                  >
                     {tripType === 'roundway' && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
                   </span>
-                  <input
-                    type="radio"
-                    name="tripType"
-                    checked={tripType === 'roundway'}
-                    onChange={() => setTripType('roundway')}
-                    className="sr-only"
-                  />
-                  <span className={tripType === 'roundway' ? 'text-neutral-900' : 'text-neutral-700'}>Round Way</span>
+                  <span>Round Way</span>
                 </label>
 
-                <label className="flex items-center gap-2 cursor-pointer select-none">
-                  <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${tripType === 'hourly' ? 'border-[#0052fe]' : 'border-neutral-300'
-                    }`}>
+                <label
+                  onClick={() => setTripType('hourly')}
+                  className={`flex items-center gap-2 cursor-pointer select-none px-3.5 py-1.5 rounded-full transition-colors ${
+                    tripType === 'hourly'
+                      ? 'bg-blue-50 text-[#0052fe]'
+                      : 'text-neutral-700 hover:text-neutral-900'
+                  }`}
+                >
+                  <span
+                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
+                      tripType === 'hourly' ? 'border-[#0052fe]' : 'border-neutral-300'
+                    }`}
+                  >
                     {tripType === 'hourly' && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
                   </span>
-                  <input
-                    type="radio"
-                    name="tripType"
-                    checked={tripType === 'hourly'}
-                    onChange={() => setTripType('hourly')}
-                    className="sr-only"
-                  />
-                  <span className={tripType === 'hourly' ? 'text-neutral-900' : 'text-neutral-700'}>Hourly</span>
+                  <span>Hourly</span>
                 </label>
               </div>
 
               {/* Continue Button */}
               <button
                 type="button"
-                className="inline-flex items-center justify-center gap-3 bg-[#0052fe] hover:bg-[#0042cc] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-3 bg-[#0052fe] hover:bg-[#0042cc] text-white font-bold px-8 py-3 rounded-lg shadow-md transition-all active:scale-[0.98] cursor-pointer"
               >
                 <span>Continue</span>
                 <ArrowRight className="w-4 h-4" />

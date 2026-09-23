@@ -3,7 +3,7 @@ import phoneHandImg from '../assets/phone_hand.png'
 
 export default function DownloadAppSection() {
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 font-sans">
+    <section className="w-full px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-16 sm:pb-20 font-sans">
       <div className="max-w-7xl mx-auto">
         {/*
           overflow-visible on the container so the phone image
