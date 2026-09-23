@@ -1,31 +1,66 @@
-import  { useState } from 'react'
-import { Car, MapPin, Calendar, ArrowRight, ChevronDown } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Car, MapPin, Calendar, ArrowRight, ChevronDown, Plane } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import movingCarGif from '../assets/Moving car.gif'
 import buildingImg from '../assets/Building.png'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function BookingHeroSection() {
   const [activeTab, setActiveTab] = useState('car') // 'car' | 'airport'
   const [tripType, setTripType] = useState('oneway') // 'oneway' | 'roundway' | 'hourly'
+  const [airportTripType, setAirportTripType] = useState('from_airport') // 'from_airport' | 'from_home'
+  
   const [carType, setCarType] = useState('')
   const [pickup, setPickup] = useState('')
   const [dropoff, setDropoff] = useState('')
   const [dateTime, setDateTime] = useState('')
 
+  const sectionRef = useRef(null)
+  const cardRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(cardRef.current, {
+        y: 40,
+        opacity: 0,
+        duration: 0.9,
+        delay: 0.2,
+        ease: 'power3.out',
+      })
+
+      gsap.from('.stat-box', {
+        scrollTrigger: {
+          trigger: '.stats-grid',
+          start: 'top 85%',
+        },
+        y: 30,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.7,
+        ease: 'power2.out',
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <div className="w-full relative overflow-hidden bg-[#0052fe] text-white pt-0 pb-0">
-      {/* Container */}
+    <div ref={sectionRef} className="w-full relative overflow-visible bg-[#0052fe] text-white pt-24 sm:pt-32 pb-0">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Floating Card overlapping the white and blue boundary */}
-        <div className="relative -mt-24 sm:-mt-28 mb-16 sm:mb-20">
+        
+        {/* Overlapping Card Container: Attached 50% on white section / 50% on blue section using transform */}
+        <div ref={cardRef} className="relative -translate-y-1/2 z-20 mb-[-6rem] sm:mb-[-7rem]">
           {/* Top Tabs */}
-          <div className="inline-flex rounded-t-xl overflow-hidden shadow-sm">
+          <div className="inline-flex rounded-t-xl overflow-hidden">
             <button
               type="button"
               onClick={() => setActiveTab('car')}
-              className={`px-7 py-3 text-sm font-bold transition-colors cursor-pointer ${
+              className={`px-6 sm:px-8 py-3 text-sm font-bold transition-colors cursor-pointer ${
                 activeTab === 'car'
                   ? 'bg-[#12161f] text-white'
-                  : 'bg-[#f4f5f7] text-neutral-700 hover:bg-neutral-200'
+                  : 'bg-white text-neutral-800 hover:bg-neutral-100'
               }`}
             >
               Car Rental
@@ -33,22 +68,23 @@ export default function BookingHeroSection() {
             <button
               type="button"
               onClick={() => setActiveTab('airport')}
-              className={`px-7 py-3 text-sm font-bold transition-colors cursor-pointer ${
+              className={`px-6 sm:px-8 py-3 text-sm font-bold transition-colors cursor-pointer ${
                 activeTab === 'airport'
                   ? 'bg-[#12161f] text-white'
-                  : 'bg-[#f4f5f7] text-neutral-700 hover:bg-neutral-200'
+                  : 'bg-white text-neutral-800 hover:bg-neutral-100'
               }`}
             >
               Airport Rental
             </button>
           </div>
 
-          {/* White Card Container */}
-          <div className="bg-white rounded-b-2xl rounded-tr-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.18)] p-6 sm:p-8 text-neutral-900">
-            {/* Input Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-6 border-b border-neutral-100">
+          {/* White Main Box */}
+          <div className="bg-white rounded-b-2xl rounded-tr-2xl shadow-xl p-5 sm:p-7 text-neutral-900">
+            {/* Input Form Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-6 border-b border-neutral-100">
+              
               {/* Choose a Car */}
-              <div className="flex flex-col gap-1.5 md:border-r md:border-neutral-200 md:pr-4">
+              <div className="flex flex-col gap-1 lg:border-r lg:border-neutral-200 lg:pr-3">
                 <label className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
                   <Car className="w-4 h-4 text-neutral-900" />
                   <span>Choose a Car <span className="text-red-500">*</span></span>
@@ -57,35 +93,53 @@ export default function BookingHeroSection() {
                   <select
                     value={carType}
                     onChange={(e) => setCarType(e.target.value)}
-                    className="w-full bg-transparent text-sm text-neutral-700 py-1.5 pr-8 focus:outline-none appearance-none cursor-pointer placeholder:text-neutral-400 font-medium"
+                    className="w-full bg-transparent text-sm text-neutral-700 py-1.5 pr-8 focus:outline-none appearance-none cursor-pointer font-medium"
                   >
                     <option value="" disabled>Select Car Type</option>
                     <option value="sedan">Sedan (4 Seater)</option>
                     <option value="suv">SUV / Noah (7 Seater)</option>
                     <option value="hiace">Hiace (11 Seater)</option>
-                    <option value="luxury">Luxury Car</option>
                   </select>
                   <ChevronDown className="w-4 h-4 text-neutral-400 absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
 
-              {/* Pickup Location */}
-              <div className="flex flex-col gap-1.5 md:border-r md:border-neutral-200 md:pr-4">
+              {/* Dynamic Field 2: Pickup / Airport */}
+              <div className="flex flex-col gap-1 lg:border-r lg:border-neutral-200 lg:pr-3">
                 <label className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block ring-2 ring-amber-200" />
-                  <span>Pickup Location <span className="text-red-500">*</span></span>
+                  {activeTab === 'airport' ? (
+                    <Plane className="w-4 h-4 text-amber-500" />
+                  ) : (
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block ring-2 ring-amber-200" />
+                  )}
+                  <span>{activeTab === 'airport' ? 'Pickup Airport' : 'Pickup Location'} <span className="text-red-500">*</span></span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Enter Pickup Location"
-                  value={pickup}
-                  onChange={(e) => setPickup(e.target.value)}
-                  className="w-full bg-transparent text-sm text-neutral-700 py-1.5 focus:outline-none placeholder:text-neutral-400 font-medium"
-                />
+                {activeTab === 'airport' ? (
+                  <div className="relative">
+                    <select
+                      value={pickup}
+                      onChange={(e) => setPickup(e.target.value)}
+                      className="w-full bg-transparent text-sm text-neutral-700 py-1.5 pr-8 focus:outline-none appearance-none cursor-pointer font-medium"
+                    >
+                      <option value="" disabled>Select Airport</option>
+                      <option value="dac">Hazrat Shahjalal Intl Airport (DAC)</option>
+                      <option value="cgp">Shah Amanat Intl Airport (CGP)</option>
+                    </select>
+                    <ChevronDown className="w-4 h-4 text-neutral-400 absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    placeholder="Enter Pickup Location"
+                    value={pickup}
+                    onChange={(e) => setPickup(e.target.value)}
+                    className="w-full bg-transparent text-sm text-neutral-700 py-1.5 focus:outline-none placeholder:text-neutral-400 font-medium"
+                  />
+                )}
               </div>
 
               {/* Drop-off Location */}
-              <div className="flex flex-col gap-1.5 md:border-r md:border-neutral-200 md:pr-4">
+              <div className="flex flex-col gap-1 lg:border-r lg:border-neutral-200 lg:pr-3">
                 <label className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
                   <MapPin className="w-4 h-4 text-[#0052fe]" />
                   <span>Drop-off Location <span className="text-red-500">*</span></span>
@@ -100,7 +154,7 @@ export default function BookingHeroSection() {
               </div>
 
               {/* Pickup Date & Time */}
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1">
                 <label className="text-xs font-bold text-neutral-900 flex items-center gap-1.5">
                   <Calendar className="w-4 h-4 text-neutral-900" />
                   <span>Pickup Date & Time <span className="text-red-500">*</span></span>
@@ -119,69 +173,57 @@ export default function BookingHeroSection() {
               </div>
             </div>
 
-            {/* Bottom Row: Radio Options & Continue Button */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-5">
-              {/* Radio Group with Active Pill Highlight */}
-              <div className="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
-                <label
-                  onClick={() => setTripType('oneway')}
-                  className={`flex items-center gap-2 cursor-pointer select-none px-3.5 py-1.5 rounded-full transition-colors ${
-                    tripType === 'oneway'
-                      ? 'bg-blue-50 text-[#0052fe]'
-                      : 'text-neutral-700 hover:text-neutral-900'
-                  }`}
-                >
-                  <span
-                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
-                      tripType === 'oneway' ? 'border-[#0052fe]' : 'border-neutral-300'
-                    }`}
-                  >
-                    {tripType === 'oneway' && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
-                  </span>
-                  <span>One Way</span>
-                </label>
+            {/* Bottom Row Controls */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-5">
+              
+              {/* Radio Group based on active tab */}
+              {activeTab === 'car' ? (
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-sm font-semibold">
+                  {[
+                    { id: 'oneway', label: 'One Way' },
+                    { id: 'roundway', label: 'Round Way' },
+                    { id: 'hourly', label: 'Hourly' },
+                  ].map((item) => (
+                    <label
+                      key={item.id}
+                      onClick={() => setTripType(item.id)}
+                      className={`flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full transition-colors ${
+                        tripType === item.id ? 'bg-blue-50 text-[#0052fe]' : 'text-neutral-700'
+                      }`}
+                    >
+                      <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${tripType === item.id ? 'border-[#0052fe]' : 'border-neutral-300'}`}>
+                        {tripType === item.id && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
+                      </span>
+                      <span>{item.label}</span>
+                    </label>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 sm:gap-4 text-sm font-semibold">
+                  {[
+                    { id: 'from_airport', label: 'From Airport' },
+                    { id: 'from_home', label: 'From Home' },
+                  ].map((item) => (
+                    <label
+                      key={item.id}
+                      onClick={() => setAirportTripType(item.id)}
+                      className={`flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full transition-colors ${
+                        airportTripType === item.id ? 'bg-blue-50 text-[#0052fe]' : 'text-neutral-700'
+                      }`}
+                    >
+                      <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${airportTripType === item.id ? 'border-[#0052fe]' : 'border-neutral-300'}`}>
+                        {airportTripType === item.id && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
+                      </span>
+                      <span>{item.label}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
 
-                <label
-                  onClick={() => setTripType('roundway')}
-                  className={`flex items-center gap-2 cursor-pointer select-none px-3.5 py-1.5 rounded-full transition-colors ${
-                    tripType === 'roundway'
-                      ? 'bg-blue-50 text-[#0052fe]'
-                      : 'text-neutral-700 hover:text-neutral-900'
-                  }`}
-                >
-                  <span
-                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
-                      tripType === 'roundway' ? 'border-[#0052fe]' : 'border-neutral-300'
-                    }`}
-                  >
-                    {tripType === 'roundway' && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
-                  </span>
-                  <span>Round Way</span>
-                </label>
-
-                <label
-                  onClick={() => setTripType('hourly')}
-                  className={`flex items-center gap-2 cursor-pointer select-none px-3.5 py-1.5 rounded-full transition-colors ${
-                    tripType === 'hourly'
-                      ? 'bg-blue-50 text-[#0052fe]'
-                      : 'text-neutral-700 hover:text-neutral-900'
-                  }`}
-                >
-                  <span
-                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
-                      tripType === 'hourly' ? 'border-[#0052fe]' : 'border-neutral-300'
-                    }`}
-                  >
-                    {tripType === 'hourly' && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
-                  </span>
-                  <span>Hourly</span>
-                </label>
-              </div>
-
-              {/* Continue Button */}
+              {/* Submit Button */}
               <button
                 type="button"
-                className="inline-flex items-center justify-center gap-3 bg-[#0052fe] hover:bg-[#0042cc] text-white font-bold px-8 py-3 rounded-lg shadow-md transition-all active:scale-[0.98] cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#0052fe] hover:bg-[#0042cc] text-white font-bold px-8 py-3 rounded-lg shadow-md transition-colors cursor-pointer"
               >
                 <span>Continue</span>
                 <ArrowRight className="w-4 h-4" />
@@ -190,54 +232,46 @@ export default function BookingHeroSection() {
           </div>
         </div>
 
-        {/* Heading & Stats */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pb-28 sm:pb-32">
-          {/* Left Title */}
+        {/* Heading & Stats Grid */}
           <div className="lg:col-span-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
               From Everyday Rides to Meaningful Journeys
             </h2>
           </div>
 
-          {/* Right Stats Grid */}
-          <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-6 text-left">
-            <div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#facc15] tracking-tight">300,000+</div>
-              <div className="text-xs sm:text-sm font-medium text-white/90 mt-1">Trip Requests</div>
+          <div className="stats-grid lg:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-8 text-left">
+            <div className="stat-box">
+              <div className="text-4xl sm:text-3xl font-extrabold text-[#facc15] tracking-tight">300,000+</div>
+              <div className="text-2xl sm:text-sm font-medium text-white/90 mt-1">Trip Requests</div>
             </div>
-            <div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#facc15] tracking-tight">850,000+</div>
-              <div className="text-xs sm:text-sm font-medium text-white/90 mt-1">Total Customers</div>
+            <div className="stat-box">
+              <div className="text-4xl sm:text-3xl font-extrabold text-[#facc15] tracking-tight">850,000+</div>
+              <div className="text-2xl sm:text-sm font-medium text-white/90 mt-1">Total Customers</div>
             </div>
-            <div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#facc15] tracking-tight">35,000+</div>
-              <div className="text-xs sm:text-sm font-medium text-white/90 mt-1">Active Drivers</div>
+            <div className="stat-box">
+              <div className="text-4xl sm:text-3xl font-extrabold text-[#facc15] tracking-tight">35,000+</div>
+              <div className="text-2xl sm:text-sm font-medium text-white/90 mt-1">Active Drivers</div>
             </div>
-            <div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#facc15] tracking-tight">64</div>
-              <div className="text-xs sm:text-sm font-medium text-white/90 mt-1">District Covered</div>
+            <div className="stat-box">
+              <div className="text-4xl sm:text-3xl font-extrabold text-[#facc15] tracking-tight">64</div>
+              <div className="text-2xl sm:text-sm font-medium text-white/90 mt-1">District Covered</div>
             </div>
           </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pb-28 sm:pb-32 pt-10 sm:pt-16">
         </div>
       </div>
 
-      {/* Infinite Scrolling Buildings Track */}
+      {/* Buildings & Car Animation */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none z-0 h-28 sm:h-36">
         <div className="flex w-max animate-building-loop">
-          <img src={buildingImg} alt="City Buildings" className="h-28 sm:h-36 object-contain select-none" />
-          <img src={buildingImg} alt="City Buildings" className="h-28 sm:h-36 object-contain select-none" />
-          <img src={buildingImg} alt="City Buildings" className="h-28 sm:h-36 object-contain select-none" />
-          <img src={buildingImg} alt="City Buildings" className="h-28 sm:h-36 object-contain select-none" />
+          <img src={buildingImg} alt="City Buildings" className="h-28 sm:h-36 object-contain" />
+          <img src={buildingImg} alt="City Buildings" className="h-28 sm:h-36 object-contain" />
+          <img src={buildingImg} alt="City Buildings" className="h-28 sm:h-36 object-contain" />
         </div>
       </div>
 
-      {/* Static GIF Car over looping background */}
       <div className="absolute bottom-0 left-4 sm:left-10 z-10 pointer-events-none">
-        <img
-          src={movingCarGif}
-          alt="Car"
-          className="w-36 sm:w-52 h-auto object-contain drop-shadow-lg"
-        />
+        <img src={movingCarGif} alt="Car" className="w-36 sm:w-52 h-auto object-contain" />
       </div>
     </div>
   )

@@ -194,15 +194,14 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Pay With / Brands Strip ── */}
-
     </footer>
-      <div className="w-full bg-white border-t border-neutral-200 py-2.5 px-4 overflow-x-auto">
-        <div className="max-w-7xl mx-auto flex items-center justify-center min-w-max">
+      {/* ── Pay With / Brands Strip ── */}
+      <div className="w-full bg-white border-t border-neutral-100 py-3 px-4 overflow-hidden">
+        <div className="max-w-7xl mx-auto flex items-center justify-center">
           <img
             src={brandImg}
             alt="Accepted Payment Methods"
-            className="h-7 sm:h-8 w-auto max-w-none object-contain"
+            className="w-full max-w-6xl h-auto object-contain block select-none"
           />
         </div>
       </div>

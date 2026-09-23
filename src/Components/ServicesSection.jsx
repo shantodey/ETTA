@@ -52,14 +52,14 @@ export default function ServicesSection() {
                   <div className={`absolute inset-0 bg-[#0052fe] z-0 transition-transform duration-500 ease-out origin-left pointer-events-none 
                     ${isActive ? 'scale-x-100' : 'scale-x-0'}`} />
                   <div className="relative z-10">
-                    <div className={`-ml-7 -mt-3 inline-block transition-transform duration-500 ease-out origin-left ${isActive ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0 pointer-events-none'}`}>
-                      <div className="bg-white rounded-r-3xl py-3 px-6 shadow-sm flex items-center justify-center">
-                        <img src={service.image} alt={service.title} className="w-20 h-14 object-contain" />
-                      </div>
-                    </div>
-
-                    <div className={`absolute top-2 left-0 transition-opacity duration-300 ${isActive ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} >
-                      <img src={service.image} alt={service.title} className="w-20 h-14 object-contain" />
+                    <div className="w-20 h-14 flex items-center justify-start">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className={`w-20 h-14 object-contain transition-transform duration-300 ${
+                          isActive ? 'scale-105' : 'scale-100'
+                        }`}
+                      />
                     </div>
                   </div>
 
