@@ -17,29 +17,41 @@ const cards = [
 export default function MoreThanMilesSection() {
   const sectionRef = useRef(null)
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.miles-card', {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-        },
-        y: 40,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: 'power3.out',
-      })
-    }, sectionRef)
+useEffect(() => {
+  const ctx = gsap.context(() => {
+    const cards = gsap.utils.toArray('.miles-card')
 
-    return () => ctx.revert()
-  }, [])
+    gsap.set(cards, {
+      y: 40,
+      opacity: 0,
+    })
+
+    gsap.to(cards, {
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 75%',
+        once: true,
+      },
+      y: 0,
+      opacity: 1,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: 'power3.out',
+    })
+  }, sectionRef)
+
+  return () => ctx.revert()
+}, [])
 
   return (
-    <section ref={sectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 font-sans">
+    <section
+      ref={sectionRef}
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 font-sans"
+    >
       <div className="mb-10 sm:mb-12">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight">
-          More Than Miles —<br />We Bring People Together
+          More Than Miles —<br />
+          We Bring People Together
         </h2>
       </div>
 
@@ -56,6 +68,7 @@ export default function MoreThanMilesSection() {
             />
 
             <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/10 to-transparent pointer-events-none" />
+
             <div className="relative z-10 p-6 sm:p-7">
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight drop-shadow-sm">
                 {item.title}
