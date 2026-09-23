@@ -22,24 +22,15 @@ export default function BookingHeroSection() {
             <button
               type="button"
               onClick={() => setActiveTab('car')}
-              className={`px-7 py-3 text-sm font-semibold transition-colors ${
-                activeTab === 'car'
+              className={`px-7 py-3 text-sm font-semibold transition-colors ${activeTab === 'car'
                   ? 'bg-[#11161d] text-white'
                   : 'bg-white text-neutral-800 hover:bg-neutral-50'
-              }`}
+                }`}
             >
               Car Rental
             </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('airport')}
-              className={`px-7 py-3 text-sm font-semibold transition-colors ${
-                activeTab === 'airport'
-                  ? 'bg-[#11161d] text-white'
-                  : 'bg-white text-neutral-800 hover:bg-neutral-50'
-              }`}
-            >
-              Airport Rental
+            <button type="button" onClick={() => setActiveTab('airport')}
+              className={`px-7 py-3 text-sm font-semibold transition-colors ${activeTab === 'airport' ? 'bg-[#11161d] text-white' : 'bg-white text-neutral-800 hover:bg-neutral-50'}`}> Airport Rental
             </button>
           </div>
 
@@ -119,9 +110,8 @@ export default function BookingHeroSection() {
               {/* Radio Group */}
               <div className="flex items-center gap-6 text-sm font-semibold">
                 <label className="flex items-center gap-2 cursor-pointer select-none">
-                  <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
-                    tripType === 'oneway' ? 'border-[#0052fe]' : 'border-neutral-300'
-                  }`}>
+                  <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${tripType === 'oneway' ? 'border-[#0052fe]' : 'border-neutral-300'
+                    }`}>
                     {tripType === 'oneway' && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
                   </span>
                   <input
@@ -135,9 +125,8 @@ export default function BookingHeroSection() {
                 </label>
 
                 <label className="flex items-center gap-2 cursor-pointer select-none">
-                  <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
-                    tripType === 'roundway' ? 'border-[#0052fe]' : 'border-neutral-300'
-                  }`}>
+                  <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${tripType === 'roundway' ? 'border-[#0052fe]' : 'border-neutral-300'
+                    }`}>
                     {tripType === 'roundway' && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
                   </span>
                   <input
@@ -151,9 +140,8 @@ export default function BookingHeroSection() {
                 </label>
 
                 <label className="flex items-center gap-2 cursor-pointer select-none">
-                  <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
-                    tripType === 'hourly' ? 'border-[#0052fe]' : 'border-neutral-300'
-                  }`}>
+                  <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${tripType === 'hourly' ? 'border-[#0052fe]' : 'border-neutral-300'
+                    }`}>
                     {tripType === 'hourly' && <span className="w-2 h-2 rounded-full bg-[#0052fe]" />}
                   </span>
                   <input

@@ -4,6 +4,8 @@ import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import BookingHeroSection from './components/BookingHeroSection'
 import ServicesSection from './components/ServicesSection'
+import FreedomSection from './components/FreedomSection'
+import MoreThanMilesSection from './components/MoreThanMilesSection'
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <HeroSection />
         <BookingHeroSection />
         <ServicesSection />
+        <FreedomSection />
+        <MoreThanMilesSection />
       </main>
     </div>
   )
