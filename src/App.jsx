@@ -1,18 +1,18 @@
 
 
-import Navbar from './components/Navbar'
-import HeroSection from './components/HeroSection'
-import BookingHeroSection from './components/BookingHeroSection'
-import ServicesSection from './components/ServicesSection'
-import FreedomSection from './components/FreedomSection'
-import MoreThanMilesSection from './components/MoreThanMilesSection'
-import AppShowcaseSection from './components/AppShowcaseSection'
-import SmartDriverSection from './components/SmartDriverSection'
-import FeaturedNewsSection from './components/FeaturedNewsSection'
-import PassengersSpeakSection from './components/PassengersSpeakSection'
-import BeyondDestinationsSection from './components/BeyondDestinationsSection'
-import DownloadAppSection from './components/DownloadAppSection'
-import Footer from './components/Footer'
+import Navbar from './Components/Navbar'
+import HeroSection from './Components/HeroSection'
+import BookingHeroSection from './Components/BookingHeroSection'
+import ServicesSection from './Components/ServicesSection'
+import FreedomSection from './Components/FreedomSection'
+import MoreThanMilesSection from './Components/MoreThanMilesSection'
+import AppShowcaseSection from './Components/AppShowcaseSection'
+import SmartDriverSection from './Components/SmartDriverSection'
+import FeaturedNewsSection from './Components/FeaturedNewsSection'
+import PassengersSpeakSection from './Components/PassengersSpeakSection'
+import BeyondDestinationsSection from './Components/BeyondDestinationsSection'
+import DownloadAppSection from './Components/DownloadAppSection'
+import Footer from './Components/Footer'
 
 function App() {
   return (
