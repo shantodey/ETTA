@@ -5,21 +5,9 @@ import familyTripImg from '../assets/Family trip.webp'
 import tourImg from '../assets/Tour.webp'
 
 const cards = [
-  {
-    id: 1,
-    title: 'Airport Rentals',
-    image: airportImg,
-  },
-  {
-    id: 2,
-    title: 'Family Trips',
-    image: familyTripImg,
-  },
-  {
-    id: 3,
-    title: 'Long Tours',
-    image: tourImg,
-  },
+  { id: 1, title: 'Airport Rentals', image: airportImg, },
+  { id: 2, title: 'Family Trips', image: familyTripImg, },
+  { id: 3, title: 'Long Tours', image: tourImg, },
 ]
 
 export default function MoreThanMilesSection() {

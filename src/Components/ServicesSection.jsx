@@ -6,30 +6,10 @@ import airportImg from '../assets/Airport rental.svg'
 import hourlyImg from '../assets/Hourly rental.svg'
 
 const services = [
-  {
-    id: 1,
-    title: 'Intercity Car Rental',
-    desc: 'Travel between cities with comfort and confidence.',
-    image: intercityImg,
-  },
-  {
-    id: 2,
-    title: 'Ride share',
-    desc: 'Go anywhere in the city, quickly and easily.',
-    image: rideshareImg,
-  },
-  {
-    id: 3,
-    title: 'Airport Rental',
-    desc: "Whether you're flying abroad or returning home, enjoy a comfortable and worry-free airport journey.",
-    image: airportImg,
-  },
-  {
-    id: 4,
-    title: 'Hourly Rental',
-    desc: 'Rent a car by the hour, tailored to your needs.',
-    image: hourlyImg,
-  },
+  {  id: 1,  title: 'Intercity Car Rental',  desc: 'Travel between cities with comfort and confidence.',  image: intercityImg,},
+  {  id: 2,  title: 'Ride share',  desc: 'Go anywhere in the city, quickly and easily.',  image: rideshareImg,},
+  {  id: 3,  title: 'Airport Rental',  desc: "Whether you're flying abroad or returning home, enjoy a comfortable and worry-free airport journey.",  image: airportImg,},
+  {  id: 4,  title: 'Hourly Rental',  desc: 'Rent a car by the hour, tailored to your needs.',  image: hourlyImg,},
 ]
 
 export default function ServicesSection() {
@@ -37,9 +17,7 @@ export default function ServicesSection() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 font-sans">
-      <h3 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight mb-6">
-        Our Services
-      </h3>
+      <h3 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight mb-6"> Our Services</h3>
 
 
       <Tabs defaultValue="rides" className="w-full">

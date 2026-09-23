@@ -15,11 +15,11 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="w-full bg-white relative font-sans">
-      <div className="hidden lg:flex justify-end items-center px-8 pt-3 pb-1">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-neutral-100 font-sans">
+      <div className="hidden lg:flex justify-end items-center px-8 pt-2 pb-0">
         <button type="button"
-          className="inline-flex items-center gap-1.5 bg-[#0b4df2] text-white text-xs font-semibold px-3 py-1.5 rounded-md hover:bg-blue-700 transition-colors shadow-sm" >
-          <IoLanguageOutline className="w-4 h-4" />
+          className="inline-flex items-center gap-1.5 bg-[#0b4df2] text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-blue-700 transition-colors shadow-sm" >
+          <IoLanguageOutline className="w-3.5 h-3.5" />
           <span>English</span>
         </button>
       </div>
@@ -27,7 +27,9 @@ export default function Navbar() {
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-14">
-          <a href="#" className="flex items-center gap-2"> <img src={logo} alt="Logo" /></a>
+          <a href="#" className="flex items-center gap-2">
+            <img src={logo} alt="Garibook Logo" className="h-8 sm:h-9 w-auto object-contain block" />
+          </a>
           <nav className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <a key={link.title} href={link.href}
